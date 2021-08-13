@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{8903b48c-8735-43fa-89d1-dfdc0c1db8c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Externs">
+      <UniqueIdentifier>{56ca9c87-4a39-436f-9257-ed426ce6f277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneManager">
+      <UniqueIdentifier>{f27d9cc7-f0e6-4b62-aceb-90e401526bdc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+</Project>
