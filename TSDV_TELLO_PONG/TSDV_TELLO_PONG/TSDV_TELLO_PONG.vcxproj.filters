@@ -10,8 +10,115 @@
     <Filter Include="Scenes\SceneManager">
       <UniqueIdentifier>{f27d9cc7-f0e6-4b62-aceb-90e401526bdc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Menu">
+      <UniqueIdentifier>{5db27dc3-1e2f-4356-a6ab-c4ac5b8b7db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Game">
+      <UniqueIdentifier>{c2d3463c-bae5-4041-832d-5998691a7301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Credits">
+      <UniqueIdentifier>{9c7e4f29-a9d7-4bbe-b485-fead1941bc43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Config">
+      <UniqueIdentifier>{ef755f97-24b6-428b-92dd-2cd77d3002c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{9ecc23ee-7bb3-4425-a28e-32a6e4a61ab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Button">
+      <UniqueIdentifier>{a022cbfd-b83f-473e-af49-6427a4085721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Timer">
+      <UniqueIdentifier>{9960aeed-4cfd-4ffb-9283-6e13009d6114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Ball">
+      <UniqueIdentifier>{345b2f1e-82d4-4697-82b3-2b5f78ac342b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Vec2">
+      <UniqueIdentifier>{7425d321-5d29-49c1-b615-344c6c676f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Game\Player">
+      <UniqueIdentifier>{3e68d143-ef27-4471-a808-3e8c94488028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Collision">
+      <UniqueIdentifier>{8bb096fa-d792-47ae-b5ff-1cbfc9fd7593}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Scene Master\scenemaster.cpp">
+      <Filter>Scenes\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\extern.cpp">
+      <Filter>Externs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Menu\menu.cpp">
+      <Filter>Scenes\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Game\gameplay.cpp">
+      <Filter>Scenes\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Credits\credits.cpp">
+      <Filter>Scenes\Credits</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Config\config.cpp">
+      <Filter>Scenes\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\Button\button.cpp">
+      <Filter>Classes\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\Timer\timer.cpp">
+      <Filter>Classes\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\Ball\ball.cpp">
+      <Filter>Classes\Ball</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\Vec2\vec2.cpp">
+      <Filter>Classes\Vec2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Scenes\Game\Player\player.cpp">
+      <Filter>Scenes\Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\Collision\collision.cpp">
+      <Filter>Classes\Collision</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Scene Master\scenemaster.h">
+      <Filter>Scenes\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\extern.h">
+      <Filter>Externs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Menu\menu.h">
+      <Filter>Scenes\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Game\gameplay.h">
+      <Filter>Scenes\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Credits\credits.h">
+      <Filter>Scenes\Credits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Config\config.h">
+      <Filter>Scenes\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\Button\button.h">
+      <Filter>Classes\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\Timer\timer.h">
+      <Filter>Classes\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\Ball\ball.h">
+      <Filter>Classes\Ball</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\Vec2\vec2.h">
+      <Filter>Classes\Vec2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Scenes\Game\Player\player.h">
+      <Filter>Scenes\Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\Collision\collision.h">
+      <Filter>Classes\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -18,6 +18,35 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Extern Vars\Ball\ball.cpp" />
+    <ClCompile Include="..\src\Extern Vars\Button\button.cpp" />
+    <ClCompile Include="..\src\Extern Vars\Collision\collision.cpp" />
+    <ClCompile Include="..\src\Extern Vars\extern.cpp" />
+    <ClCompile Include="..\src\Extern Vars\Timer\timer.cpp" />
+    <ClCompile Include="..\src\Extern Vars\Vec2\vec2.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Scene Master\scenemaster.cpp" />
+    <ClCompile Include="..\src\Scenes\Config\config.cpp" />
+    <ClCompile Include="..\src\Scenes\Credits\credits.cpp" />
+    <ClCompile Include="..\src\Scenes\Game\gameplay.cpp" />
+    <ClCompile Include="..\src\Scenes\Game\Player\player.cpp" />
+    <ClCompile Include="..\src\Scenes\Menu\menu.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Extern Vars\Ball\ball.h" />
+    <ClInclude Include="..\src\Extern Vars\Button\button.h" />
+    <ClInclude Include="..\src\Extern Vars\Collision\collision.h" />
+    <ClInclude Include="..\src\Extern Vars\extern.h" />
+    <ClInclude Include="..\src\Extern Vars\Timer\timer.h" />
+    <ClInclude Include="..\src\Extern Vars\Vec2\vec2.h" />
+    <ClInclude Include="..\src\Scene Master\scenemaster.h" />
+    <ClInclude Include="..\src\Scenes\Config\config.h" />
+    <ClInclude Include="..\src\Scenes\Credits\credits.h" />
+    <ClInclude Include="..\src\Scenes\Game\gameplay.h" />
+    <ClInclude Include="..\src\Scenes\Game\Player\player.h" />
+    <ClInclude Include="..\src\Scenes\Menu\menu.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -72,9 +101,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,11 +121,27 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)lib\raylib\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)lib\raylib.dll" "$(OutDir)" /e /h /y /s</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>MKDIR "$(TargetDir)res/assets"
+XCOPY "$(SolutionDir)res/assets" "$(TargetDir)res/assets" /e /h /y /s
+MKDIR "$(ProjectDir)res\assets"
+XCOPY "$(SolutionDir)res\assets" "$(ProjectDir)res\assets" /e /h /y /s</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -102,13 +151,30 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)lib\raylib\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\raylib\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>raylib.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)lib\raylib.dll" "$(OutDir)" /e /h /y /s</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>MKDIR "$(TargetDir)res/assets"
+XCOPY "$(SolutionDir)res/assets" "$(TargetDir)res/assets" /e /h /y /s
+MKDIR "$(ProjectDir)res\assets"
+XCOPY "$(SolutionDir)res\assets" "$(ProjectDir)res\assets" /e /h /y /s</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -138,9 +204,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,0 +1,65 @@
+Pantallas
+
+	Menú
+	● Pantalla inicial. Hace de centro para acceder a otras áreas.
+	● Botones generales. Deben estar animados a la interacción del jugador (idle, hover, press)
+	● Versión de release indicada.
+	● Sección creditos (Info estudiante / recursos utilizados).
+	● Sección opciones (sonido/sfx modo on/off).
+
+	Jugar (Configuración)
+	● Selección de escenario/tablero.
+	● Debe tener por lo menos 3 variaciones a nivel visual.
+	● Configurar el color de cada jugador (blanco/negro).
+	● Configurar tiempo máximo de turno.
+	● Configurar límite de turnos.
+	● Botón de comenzar partida/volver.
+
+	Jugar (Gameplay)
+	● Tablero completo junto a las piezas. Las piezas eliminadas deben quedar a un costado del tablero (cada color de un lado).
+	● Mecánicas piezas: Es necesario emular el movimiento válido de cada tipo de pieza. No es necesario ninguna funcionalidad adicional (como enroque)
+	● Contador de turnos: Evaluar límite configurado. Si se llega al límite la partida termina en empate.
+	● Temporizador de turno: Si se acaba el tiempo el jugador actual pierde.
+	● Interacción: Para interactuar con una pieza existen 2 modalidades.
+		○ Básica (obligatorio) Se clickea la pieza y activa su modo movimiento, marcando las posiciones disponibles a la cual puede moverse. Clickear una posición válida mueve la pieza, clickear una posición inválida (o la pieza misma) desactiva su modo movimiento.
+		○ Avanzado (opcional) Se clickea y mantiene presionado el mouse para interactuar con una pieza, mostrando las posiciones disponibles al igual que el modo básico. Al desplazar el mouse la pieza sigue “flotando” al mouse mediante una transición (lerp). Una vez se suelta el botón del mouse se evalúan las mismas condiciones.
+	Aunque la animación tipo seguimiento solo es parte del modo avanzado, para ambos modos es necesario que al clickear una posición válida la pieza se traslade desde su posición actual a la nueva mediante una transición animada. Se debe ir iterando entre el turno de cada jugador, también indicando
+	visualmente en la pantalla.
+
+
+	● Condiciones
+		○ Evaluar si el juego termina por límite de turnos.
+		○ Evaluar si el juego termina por jaque mate.
+
+	● Fin Partida
+	Debe indicarse qué jugador ganó además de los turnos y tiempo totales de partida.
+	Mediante un botón puede reiniciarse la partida sin salir del gameplay, este reset debe hacerse acomodando todas las piezas mediante una transición tipo lerp a sus posiciones iniciales (junto a resetear los medidores de la UI).
+	También es posible volver al menú.
+
+	● Animaciones
+		○ Desplazamiento de piezas.
+		○ Eliminar una pieza a los laterales.
+		○ Derrota (animación especial rey cayendo).
+	
+	● Sonidos ○ Selección/deselección piezas.
+		○ Movimiento.
+		○ Eliminar pieza.
+		○ Derrota.
+		○ Turno terminado por limite tiempo.
+
+
+TERMINAR CONFIGURACION
+
+PONERLE SONIDO A LOS MOVIMIENTOS QUE LES CORRESPONDE.
+
+HACER QUE LAS PIEZAS COMIDAS VAYAN A LOS LATERALES hacer un tablerito 8x2 miniatura arriba y abajo de la zona derecha
+
+GENERAR CONDICIONES DE VICTORIA
+
+DEBUGEAR
+
+LERP
+
+SUBIRLO A ITCHIO
+
+
