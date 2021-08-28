@@ -4,7 +4,7 @@ namespace pong {
 
 	namespace elements {
 
-		Collision::Collision()
+		Ball::Ball()
 		{
 			_rotation = 0;
 			_radius = 5;
@@ -15,24 +15,24 @@ namespace pong {
 			_color = WHITE;
 			_texture = Texture2D();
 		}
-		Collision::~Collision() {}
+		Ball::~Ball() {}
 
-		int Collision::GetRotation() { return _rotation; }
-		float Collision::GetRadius() { return _radius; }
-		Vec2 Collision::GetBallAcceleration() { return _acceleration; }
-		Vec2 Collision::GetBallSpeed() { return _speed; }
-		Vec2 Collision::GetPosition() { return _position; }
-		Vec2 Collision::GetBallCenter() 
+		int Ball::GetRotation() { return _rotation; }
+		float Ball::GetRadius() { return _radius; }
+		Vec2 Ball::GetBallAcceleration() { return _acceleration; }
+		Vec2 Ball::GetBallSpeed() { return _speed; }
+		Vec2 Ball::GetPosition() { return _position; }
+		Vec2 Ball::GetBallCenter() 
 		{
 			return GetPosition()+GetRadius();
 		}
-		Texture2D Collision::GetTexture() { return _texture; }
-		Color Collision::GetColor() { return _color; }
-		Rectangle Collision::GetBallRectangle() { return { _position.x,_position.y,_radius*2,_radius*2 }; }
+		Texture2D Ball::GetTexture() { return _texture; }
+		Color Ball::GetColor() { return _color; }
+		Rectangle Ball::GetBallRectangle() { return { _position.x,_position.y,_radius*2,_radius*2 }; }
 
 
-		void Collision::SetRotation(int rotation) { _rotation = rotation; }
-		void Collision::SetRadius(float radius) 
+		void Ball::SetRotation(int rotation) { _rotation = rotation; }
+		void Ball::SetRadius(float radius) 
 		{
 			_radius = radius; 
 		
@@ -40,40 +40,40 @@ namespace pong {
 			_texture.width = _radius*2;
 		
 		}
-		void Collision::SetBallAcceleration(Vec2 acceleration) { _acceleration.Set(acceleration); }
-		void Collision::SetBallSpeed(Vec2 speed) { _speed.Set(speed); }
-		void Collision::SetPosition(Vec2 position) { _position.Set(position); }
-		void Collision::SetTexture(Texture2D texture) 
+		void Ball::SetBallAcceleration(Vec2 acceleration) { _acceleration.Set(acceleration); }
+		void Ball::SetBallSpeed(Vec2 speed) { _speed.Set(speed); }
+		void Ball::SetPosition(Vec2 position) { _position.Set(position); }
+		void Ball::SetTexture(Texture2D texture) 
 		{ 
 			_texture = texture;
 
 			_texture.height = _radius * 2;
 			_texture.width = _radius * 2;
 		}
-		void Collision::SetColor(Color color) { _color = color; };
+		void Ball::SetColor(Color color) { _color = color; };
 
-		void Collision::Init()
+		void Ball::Init()
 		{
-			_texture = Texture2D();
+			//_texture = Texture2D();
 			_texture.height = _radius*2;
 			_texture.width = _radius*2;
 		}
-		void Collision::Draw() 
+		void Ball::Draw() 
 		{
 			DrawCircle(GetBallCenter().x, GetBallCenter().y, _radius -1, _color);
 			DrawTextureEx(_texture, _position.ToVector2(), _rotation, _scale, WHITE);
 		}
-		void Collision::Deinit() 
+		void Ball::Deinit() 
 		{
 			UnloadTexture(_texture);
 		}
 		
-		void Collision::Move(float time)
+		void Ball::Move(float time)
 		{
 			SetPosition(_position + _speed * time);
 		}
 
-		void Collision::ApplyAcceleration(float time)
+		void Ball::ApplyAcceleration(float time)
 		{
 			SetBallSpeed(_speed + (_acceleration * time));
 			//std::cout << "\nSpeed: " << _speed.x << "|" << _speed.y << "\n";

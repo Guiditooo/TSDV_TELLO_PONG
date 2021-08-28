@@ -26,8 +26,8 @@ namespace pong {
 		int Timer::GetTextSize() { return _txt.size; }
 		Texture2D Timer::GetTextureBack() { return _textureBack; }
 		Texture2D Timer::GetTextureFront() { return _textureFront; }
-		bool Timer::isActive() { return _active; }
-		bool Timer::isHovered() { return _hovered; }
+		bool Timer::IsActive() { return _active; }
+		bool Timer::IsHovered() { return _hovered; }
 #pragma endregion
 
 #pragma region SET

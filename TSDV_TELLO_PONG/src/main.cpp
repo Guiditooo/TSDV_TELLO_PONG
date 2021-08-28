@@ -1,6 +1,6 @@
-#include "Scene Master/scenemaster.h"
+#include "SCENE Master/scenemaster.h"
 
 void main()
 {
-	pong::runGame();
+	pong::RunGame();
 }

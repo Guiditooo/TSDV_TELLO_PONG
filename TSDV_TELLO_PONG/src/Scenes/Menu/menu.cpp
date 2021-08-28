@@ -25,7 +25,7 @@ namespace pong {
 		Texture2D bgTexture;
 
 
-		void init() {
+		void Init() {
 
 			bgTexture = LoadTexture("res/assets/Backgrounds/BG.png");
 			bgTexture.width = config::screen::width;
@@ -48,26 +48,26 @@ namespace pong {
 				title[i].size = config::screen::height / 13;
 				title[i].pos.x = config::screen::width / 2 - MeasureTextEx(font, &title[i].tx[0], title->size, 1).x / 2;
 				title[i].pos.y = config::screen::height * (2 + i) / 13 + 5 * i;
-				title[i].color = getRandomColor(200,255);
+				title[i].color = GetRandomColor(200,255);
 
 			}
 
-			background = getRandomColor(170,255);
+			background = GetRandomColor(170,255);
 
 			for (short i = 0; i < howManyButtons; i++) {
 
 				Buttons btn;
 				std::string text;
 
-				switch ((config::scenes::Scene)(i+1)) {
+				switch ((config::scenes::SCENE)(i+1)) {
 
-				case config::scenes::Scene::CONFIG:
+				case config::scenes::SCENE::CONFIG:
 					text = "PLAY";
 					break;
-				case config::scenes::Scene::CREDITS:
+				case config::scenes::SCENE::CREDITS:
 					text = "CREDITS";
 					break;
-				case config::scenes::Scene::QUIT:
+				case config::scenes::SCENE::QUIT:
 					text = "EXIT";
 					break;
 
@@ -88,7 +88,7 @@ namespace pong {
 
 		}
 
-		void update() 
+		void Update() 
 		{
 
 			time++;
@@ -129,7 +129,7 @@ namespace pong {
 					if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) 
 					{
 
-						config::scenes::next_scene = static_cast<config::scenes::Scene>(i + 1);
+						config::scenes::next_scene = static_cast<config::scenes::SCENE>(i + 1);
 
 					}
 
@@ -143,7 +143,7 @@ namespace pong {
 
 		}
 
-		void draw() 
+		void Draw() 
 		{
 
 			Color color;
@@ -176,13 +176,13 @@ namespace pong {
 
 				DrawTextEx(font, &(btn.txt.tx)[0], { btn.square.x, btn.square.y }, btn.square.height, 1, color);
 
-				//btn.drawButton();
+				//btn.DrawButton();
 
 			}
 
 		}
 
-		void deinit() 
+		void Deinit() 
 		{
 			UnloadTexture(bgTexture);
 			UnloadSound(buttonBeep);

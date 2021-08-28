@@ -12,10 +12,10 @@ namespace pong {
 		static Sound buttonBeep;
 		static Music creditMusic;
 
-		void init();
-		void update();
-		void draw();
-		void deinit();
+		void Init();
+		void Update();
+		void Draw();
+		void Deinit();
 
 	}
 

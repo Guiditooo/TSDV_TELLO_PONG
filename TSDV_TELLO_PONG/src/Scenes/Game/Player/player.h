@@ -16,7 +16,7 @@ namespace pong {
 			~Player();
 			void SetPosition(Vec2 position);
 			void SetSpeed(Vec2 speed);
-			void SetAxis(Axis axis);
+			void SetAxis(AXIS axis);
 			void SetColor(Color color);
 			void SetText(std::string text);
 			void SetTextSize(int textSize);
@@ -36,10 +36,13 @@ namespace pong {
 			void SetActionKey(ACTIONKEYS index, KeyboardKey key);
 			void SetScore(int score);
 			void Setside(SIDE side);
+			void Scored(bool scored);
+			void Hitted(bool hitted);
+			void Won(bool won);
 
 			Vec2 GetPosition();
 			Vec2 GetVelocity();
-			Axis GetAxis();
+			AXIS GetAxis();
 			Color GetColor();
 			std::string GetText();
 			int GetTextSize();
@@ -58,6 +61,9 @@ namespace pong {
 			int GetScore();
 			Rectangle GetRectangle();
 			SIDE GetSide();
+			bool JustScored();
+			bool JustHitted();
+			bool JustWon();
 
 			void MovePlayer();
 			void ChargeTextValue();
@@ -69,12 +75,15 @@ namespace pong {
 		private:
 			Letter _scoreBoard;
 			int _score;
+			bool _justScored;
+			bool _justHitted;
+			bool _justWon;
 			Rectangle _rec;
 			Vec2 _speed;
 			float _scale;
 			Text _label;
 			Color _color;
-			Axis _axis;
+			AXIS _axis;
 			SIDE _side;
 			KeyboardKey _keys[actionKeysCount];
 		};

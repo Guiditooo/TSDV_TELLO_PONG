@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Extern Vars\area.cpp" />
     <ClCompile Include="..\src\Extern Vars\Ball\ball.cpp" />
     <ClCompile Include="..\src\Extern Vars\Button\button.cpp" />
     <ClCompile Include="..\src\Extern Vars\Collision\collision.cpp" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\src\Extern Vars\Button\button.h" />
     <ClInclude Include="..\src\Extern Vars\Collision\collision.h" />
     <ClInclude Include="..\src\Extern Vars\extern.h" />
+    <ClInclude Include="..\src\Extern Vars\area.h" />
     <ClInclude Include="..\src\Extern Vars\Timer\timer.h" />
     <ClInclude Include="..\src\Extern Vars\Vec2\vec2.h" />
     <ClInclude Include="..\src\Scene Master\scenemaster.h" />

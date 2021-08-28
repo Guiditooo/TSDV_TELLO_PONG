@@ -28,8 +28,8 @@ namespace pong {
 			Vec2 GetTimerPosition();
 			Vec2 GetTimerSize();
 			int GetTextSize();
-			bool isActive();
-			bool isHovered();
+			bool IsActive();
+			bool IsHovered();
 			Texture2D GetTextureBack();
 			Texture2D GetTextureFront();
 			void SetActive(bool active);

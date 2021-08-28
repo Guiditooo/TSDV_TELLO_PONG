@@ -12,7 +12,9 @@ namespace pong {
 
 	extern Font font;
 	extern Font scoreFont;
-	
+
+	extern int pointLimit;
+
 	const int fontSize = 64;
 
 	const float plusSelected = 1.15f;
@@ -22,11 +24,14 @@ namespace pong {
 
 	const int actionKeysCount = 6;
 
-	Color createColor(Vector4 v);
-	Color createColor(Vector3 v);
-	Color createColor(int r, int g, int b, int a);
+	Color CreateColor(Vector4 v);
+	Color CreateColor(Vector3 v);
+	Color CreateColor(int r, int g, int b, int a);
+	Color CreateColor(int r, int g, int b);
+	
+	extern Color backgroundColor;
 
-	enum class Axis
+	enum class AXIS
 	{
 		HORIZONTAL,
 		VERTICAL,
@@ -110,11 +115,10 @@ namespace pong {
 		float scale = 1;
 		Text txt;
 		TextureInfo texture;
-		void drawButton() 
+		void DrawButton() 
 		{
 			DrawRectangleRec(square, BLACK);
 			DrawRectangleLinesEx(square, 3, WHITE);
-			//DrawText(&txt.tx[0], txt.pos.x, txt.pos.y, txt.size, WHITE);
 			DrawTextEx(font, &(txt.tx)[0], { square.x, square.y }, square.height, 1, WHITE);
 		}
 	};
@@ -128,13 +132,13 @@ namespace pong {
 			extern int fpsRate;
 			extern Vec2 screenCenter;
 
-			void setCenterPoint();
+			void SetCenterPoint();
 
 		}
 
 		namespace scenes {
 
-			enum class Scene 
+			enum class SCENE 
 			{
 				MENU,
 				CONFIG,
@@ -145,29 +149,10 @@ namespace pong {
 				NONE
 			};
 
-			extern Scene scene;
-			extern Scene next_scene;
+			extern SCENE scene;
+			extern SCENE next_scene;
 
 		}
-
-		namespace board {
-
-			const int slotSize = 74;
-			const int boardFrame = 55;
-
-			extern int width;
-			extern int height;
-			extern Color tint;
-
-			enum class SIDE 
-			{
-				UP, //WHITE
-				DOWN, //BLACK
-				NONE
-			};
-
-		}
-
 
 		namespace general {
 
@@ -200,8 +185,8 @@ namespace pong {
 	void DrawAudioButtons();
 	void DeinitAudioButtons();
 
-	Color getRandomColor(int min, int max);
-	void drawButton(Buttons btn);
+	Color GetRandomColor(int min, int max);
+	void DrawButton(Buttons btn);
 
 }
 #endif

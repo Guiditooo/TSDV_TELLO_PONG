@@ -8,11 +8,11 @@ namespace pong {
 
 	namespace elements {
 		/*
-		struct Collision
+		struct Ball
 		{
 		public:
-			Collision();
-			~Collision();
+			Ball();
+			~Ball();
 		private:
 			int aux;
 		};

@@ -20,10 +20,10 @@ namespace pong {
 
 		extern bool continueInGame;
 
-		extern void init();
-		extern void update();
-		extern void draw();
-		extern void deinit();
+		extern void Init();
+		extern void Update();
+		extern void Draw();
+		extern void Deinit();
 
 	}
 

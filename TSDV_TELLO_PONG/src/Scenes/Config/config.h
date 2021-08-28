@@ -2,10 +2,14 @@
 #define GAME_OPTIONS
 
 #include "Extern Vars/extern.h"
+#include "Scenes/Game/Player/player.h"
 
 using namespace std;
 
 namespace pong {
+
+	extern game::Player* p1;
+	extern game::Player* p2;
 
 	namespace configScreen {
 
@@ -20,14 +24,15 @@ namespace pong {
 			COLOR_PURPLE,
 			COLOR_BLUE
 		};
-		
 
-		void init();
-		void update();
-		void draw();
-		void deinit();
+		void Init();
+		void Update();
+		void Draw();
+		void Deinit();
 
 		void LoadAudio();
+		void InitAreas();
+		void DrawAreas();
 		void CheckButtons();
 
 	}

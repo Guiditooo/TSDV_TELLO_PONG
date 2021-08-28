@@ -5,7 +5,7 @@ namespace pong {
 	namespace elements {
 
 		Button::Button() {
-			_square = { 0,0,0,0 };
+			_square = Rectangle();
 			_selected = false;
 			_active = false;
 			_hovered = false;
@@ -24,8 +24,9 @@ namespace pong {
 		int Button::GetTextSize() { return _txt.size; }
 		Texture2D Button::GetBackgroundTexture() { return _backgroundTexture; }
 		Texture2D Button::GetBorderTexture() { return _borderTexture; }
-		bool Button::isActive() { return _active; }
-		bool Button::isHovered() { return _hovered; }
+		bool Button::IsActive() { return _active; }
+		bool Button::IsHovered() { return _hovered; }
+		bool Button::IsSelected() { return _selected; }
 		buttons::Selector Button::GetButtonType() { return _buttonType; }
 #pragma endregion
 
@@ -139,7 +140,14 @@ namespace pong {
 			AdjustTextPos();
 
 			_color = WHITE;
-
+		}
+		void Button::Select()
+		{
+			_selected = true;
+		}
+		void Button::DeSelect()
+		{
+			_selected = false;
 		}
 
 #pragma endregion

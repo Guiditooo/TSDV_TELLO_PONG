@@ -8,11 +8,11 @@ namespace pong {
 
 	namespace elements {
 
-		class Collision 
+		class Ball 
 		{
 		public:
-			Collision();
-			~Collision();
+			Ball();
+			~Ball();
 
 			int GetRotation();
 			float GetRadius();

@@ -20,7 +20,7 @@ namespace pong {
 
 		Vector2 mousePos;		
 
-		void init()
+		void Init()
 		{
 			string lines[howManyCreditLines] =
 			{
@@ -61,7 +61,7 @@ namespace pong {
 			buttonExit.selected = false;
 			buttonExit.clicked = false;
 		}
-		void update()
+		void Update()
 		{
 			mousePos = GetMousePosition();
 
@@ -88,7 +88,7 @@ namespace pong {
 				}
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) 
 				{
-					config::scenes::next_scene = config::scenes::Scene::MENU;
+					config::scenes::next_scene = config::scenes::SCENE::MENU;
 					
 				}
 			}
@@ -99,7 +99,7 @@ namespace pong {
 			}
 		}
 
-		void draw()
+		void Draw()
 		{
 
 			DrawTexture(background.texture, 0, 0, WHITE);
@@ -119,7 +119,7 @@ namespace pong {
 
 		}
 
-		void deinit()
+		void Deinit()
 		{
 			UnloadTexture(background.texture);
 			UnloadTexture(buttonExit.texture.texture);

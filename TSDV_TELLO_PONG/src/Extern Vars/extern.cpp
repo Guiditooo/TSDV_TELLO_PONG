@@ -11,7 +11,9 @@ namespace pong {
 	bool playMusic = true;
 	bool playSounds = true;
 
-	Color createColor(Vector4 v)
+	Color backgroundColor;
+
+	Color CreateColor(Vector4 v)
 	{
 		Color aux;
 		aux.r = v.x;
@@ -20,22 +22,29 @@ namespace pong {
 		aux.a = v.w;
 		return aux;
 	}
-	Color createColor(Vector3 v) 
+	Color CreateColor(Vector3 v) 
 	{
 		Color aux;
 		aux.r = v.x;
 		aux.g = v.y;
 		aux.b = v.z;
-		aux.a = 255;
 		return aux;
 	}
-	Color createColor(int r, int g, int b, int a)
+	Color CreateColor(int r, int g, int b, int a)
 	{
 		Color aux;
 		aux.r = r;
 		aux.g = g;
 		aux.b = b;
 		aux.a = a;
+		return aux;
+	}
+	Color CreateColor(int r, int g, int b)
+	{
+		Color aux;
+		aux.r = r;
+		aux.g = g;
+		aux.b = b;
 		return aux;
 	}
 
@@ -179,7 +188,7 @@ namespace pong {
 			int fpsRate = 60;
 			Vec2 screenCenter = Vec2(0, 0);
 
-			void setCenterPoint()
+			void SetCenterPoint()
 			{
 				screen::screenCenter = Vec2(screen::width / 2, screen::height / 2);
 			}
@@ -188,8 +197,8 @@ namespace pong {
 
 		namespace scenes {
 
-			Scene scene = Scene::NONE;
-			Scene next_scene = Scene::MENU;
+			SCENE scene = SCENE::NONE;
+			SCENE next_scene = SCENE::MENU;
 
 		}
 
@@ -216,7 +225,7 @@ namespace pong {
 
 	
 
-	Color getRandomColor(int min, int max) {
+	Color GetRandomColor(int min, int max) {
 
 		return { static_cast<unsigned char>(GetRandomValue(min, max)), static_cast<unsigned char>(GetRandomValue(min, max)), static_cast<unsigned char>(GetRandomValue(min,max)), static_cast<unsigned char>(GetRandomValue(200,255)) };
 

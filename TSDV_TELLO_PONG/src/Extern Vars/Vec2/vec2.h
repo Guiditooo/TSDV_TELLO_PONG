@@ -62,6 +62,7 @@ namespace pong {
 			Vec2 operator*(float b);
 			Vec2 operator*(Vec2 b);
 			Vec2 operator/(float b);
+
 		};
 
 

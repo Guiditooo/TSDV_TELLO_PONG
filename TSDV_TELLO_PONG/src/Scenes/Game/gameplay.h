@@ -1,8 +1,14 @@
 #ifndef GAME_PLAY
 #define GAME_PLAY
 
-#include "raylib.h"
 #include "Extern Vars/extern.h"
+#include "Extern Vars/Button/button.h"
+#include "Extern Vars/Timer/timer.h"
+#include "Extern Vars/Ball/ball.h"
+#include "Player/player.h"
+#include <iostream>
+#include <string>
+#include <vector>
 
 namespace pong {
 
@@ -16,40 +22,40 @@ namespace pong {
 		const int rows = 2;
 		const int distanceFromBoard = 10;
 
-		//extern Score p1Score, p2Score;
-
 		static Sound buttonBeep;
 		static Music gameMusic;
-
+		
 		struct Score : public Letter
 		{
 			int score;
 			void SetScoreAsText();
 		};
 
-		void init();
-		void update();
-		void draw();
-		void deinit();
+		void Init();
+		void Update();
+		void Draw();
+		void Deinit();
 
-		void resetGame();
-		void playersInit();
+		void Score();
+		void ResetGame();
+		void PlayersInit();
 
-		void musicInit();
+		void MusicInit();
 
-		void buttonsInit();
-		void timersInit();
-		void backgroundInit();
-		void zonesInit();
+		void ButtonsInit();
+		void TimersInit();
+		void BackgroundInit();
+		void ZonesInit();
+		void BallInit();
 
-		void checkButtons();
-		void checkWinConditions();
+		void CheckButtons();
+		void CheckWinConditions();
 
-		void drawTimers();
-		void drawButtons();
+		void DrawTimers();
+		void DrawButtons();
 
-		void deinitButtons();
-		void deinitTimers();
+		void DeinitButtons();
+		void DeinitTimers();
 
 		struct Limits
 		{

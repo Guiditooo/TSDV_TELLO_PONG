@@ -12,8 +12,10 @@ namespace pong {
 			_rec = { 0 };
 			_label = Text();
 			_scale = 0;
-			_axis = Axis::NONE;
+			_axis = AXIS::NONE;
 			_scoreBoard = Letter();
+			_justScored = false;
+			_justHitted = false;
 		}
 		Player::~Player(){}
 		void Player::SetPosition(Vec2 position) 
@@ -22,7 +24,7 @@ namespace pong {
 			_rec.y = position.y; 
 		}
 		void Player::SetSpeed(Vec2 speed) { _speed = speed; }
-		void Player::SetAxis(Axis axis) { _axis = axis; }
+		void Player::SetAxis(AXIS axis) { _axis = axis; }
 		void Player::SetColor(Color color) { _color = color; }
 		void Player::SetText(std::string text) { _label.tx = text; }
 		void Player::SetTextSize(int textSize) { _label.size = textSize; }
@@ -55,10 +57,13 @@ namespace pong {
 		void Player::SetActionKey(ACTIONKEYS index, KeyboardKey key) { _keys[static_cast<int>(index)] = key; }
 		void Player::SetScore(int score) { _score = score; }
 		void Player::Setside(SIDE side) { _side = side; }
+		void Player::Scored(bool score) { _justScored = score; }
+		void Player::Hitted(bool hitted) { _justHitted = hitted; }
+		void Player::Won(bool won) { _justWon = won; }
 
 		Vec2 Player::GetPosition() { return Vec2(_rec.x, _rec.y); }
 		Vec2 Player::GetVelocity() { return _speed; }
-		Axis Player::GetAxis() { return _axis; }
+		AXIS Player::GetAxis() { return _axis; }
 		Color Player::GetColor() { return _color; }
 		std::string Player::GetText() { return _label.tx; }
 		int Player::GetTextSize() { return _label.size; }
@@ -78,12 +83,15 @@ namespace pong {
 		int Player::GetLetterFrameWidth() { return _scoreBoard.frameWidth; }
 		Rectangle Player::GetRectangle() { return _rec; }
 		SIDE Player::GetSide() { return _side; }
+		bool Player::JustScored() { return _justScored; }
+		bool Player::JustHitted() { return _justHitted; }
+		bool Player::JustWon() { return _justWon; }
 
 		void Player::MovePlayer() 
 		{ 
 			switch (_axis)
 			{
-			case pong::Axis::HORIZONTAL:
+			case pong::AXIS::HORIZONTAL:
 				if (IsKeyDown(static_cast<int>(_keys[static_cast<int>(ACTIONKEYS::LEFT)])))
 				{
 					_rec.x -= _speed.x * GetFrameTime();
@@ -93,7 +101,7 @@ namespace pong {
 					_rec.x += _speed.x * GetFrameTime();
 				}
 				break;
-			case pong::Axis::VERTICAL:
+			case pong::AXIS::VERTICAL:
 				if (IsKeyDown(static_cast<int>(_keys[static_cast<int>(ACTIONKEYS::UP)])))
 				{
 					_rec.y -= _speed.y * GetFrameTime();
@@ -103,7 +111,7 @@ namespace pong {
 					_rec.y += _speed.y * GetFrameTime();
 				}
 				break;
-			case pong::Axis::BOTH:
+			case pong::AXIS::BOTH:
 				if (IsKeyDown(static_cast<int>(_keys[static_cast<int>(ACTIONKEYS::LEFT)])))
 				{
 					_rec.x -= _speed.x * GetFrameTime();
@@ -132,7 +140,11 @@ namespace pong {
 			_scoreBoard.text.tx = std::to_string(_score);
 		}
 
-		void Player::AddOneToScore() { _score++; }
+		void Player::AddOneToScore() 
+		{ 
+			_score++;
+			Scored(true);
+		}
 
 		void Player::SubOneToScore() { _score--; }
 
@@ -144,7 +156,7 @@ namespace pong {
 			aux.x -= palettePadding/2;
 			aux.y -= palettePadding/2;
 			DrawRectangleRec(aux, _color);
-			DrawRectangleRec(_rec, RAYWHITE);
+			DrawRectangleRec(_rec, BROWN);
 		}
 
 		void Player::DrawLetter()

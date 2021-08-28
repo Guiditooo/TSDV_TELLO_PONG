@@ -39,11 +39,13 @@ namespace pong{
 			int GetTextSize();
 			Vec2 GetTextPos();
 			std::string GetText();
-			bool isActive();
-			bool isHovered();
+			bool IsActive();
+			bool IsHovered();
+			bool IsSelected();
 			Texture2D GetBackgroundTexture();
 			Texture2D GetBorderTexture();
 			buttons::Selector GetButtonType();
+			
 			void SetButtonType(buttons::Selector type);
 			void SetActive(bool active);
 			void SetScale(float scale);
@@ -57,6 +59,7 @@ namespace pong{
 			void SetHovered(bool hover);
 			void SetButtonPosition(Vec2 pos);
 			void SetButtonSize(float width, float height);
+
 			void AdjustButtonSize();
 			void AdjustTextPos();
 			void AdjustTextureSize();
@@ -67,6 +70,8 @@ namespace pong{
 			void Hover();
 			void UnHover();
 			void MakeStandardButton();
+			void Select();
+			void DeSelect();
 		private:
 			Rectangle _square;
 			bool _selected;

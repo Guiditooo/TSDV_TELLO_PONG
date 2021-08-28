@@ -4,7 +4,7 @@ namespace pong {
 
 	namespace elements {
 		
-		//Collision::Collision(){}
+		//Ball::Ball(){}
 
 
 	}

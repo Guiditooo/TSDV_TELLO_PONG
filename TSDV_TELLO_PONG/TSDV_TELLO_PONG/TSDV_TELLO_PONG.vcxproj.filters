@@ -43,6 +43,9 @@
     <Filter Include="Classes\Collision">
       <UniqueIdentifier>{8bb096fa-d792-47ae-b5ff-1cbfc9fd7593}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Area">
+      <UniqueIdentifier>{43dec679-da88-4daa-852a-2e8f6c485662}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
@@ -82,6 +85,9 @@
     <ClCompile Include="..\src\Extern Vars\Collision\collision.cpp">
       <Filter>Classes\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Extern Vars\area.cpp">
+      <Filter>Classes\Area</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Scene Master\scenemaster.h">
@@ -119,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Extern Vars\Collision\collision.h">
       <Filter>Classes\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Extern Vars\area.h">
+      <Filter>Classes\Area</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

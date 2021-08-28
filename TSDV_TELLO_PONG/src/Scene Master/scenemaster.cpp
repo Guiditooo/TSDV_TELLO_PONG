@@ -7,49 +7,49 @@ namespace pong {
 
 		namespace scenes {
 
-			void sceneManager(Scene& scene, Scene nextScene)
+			void SceneManager(SCENE& scene, SCENE nextScene)
 			{
 
 				if (scene != nextScene)
 				{
 
-					switch (scene) //deinit
+					switch (scene) //Deinit
 					{
-					case Scene::MENU:
-						menu::deinit();
+					case SCENE::MENU:
+						menu::Deinit();
 						std::cout << "\nMENU Deinited";
 						break;
-					case Scene::GAME:
-						game::deinit();
+					case SCENE::GAME:
+						game::Deinit();
 						std::cout << "\nGAME Deinited";
 						break;
-					case Scene::CONFIG:
-						configScreen::deinit();
+					case SCENE::CONFIG:
+						configScreen::Deinit();
 						std::cout << "\nConfig Deinited";
 						break;
-					case Scene::CREDITS:
-						credits::deinit();
+					case SCENE::CREDITS:
+						credits::Deinit();
 						std::cout << "\nCredits Deinited";
 						break;
 					}
 
-					switch (nextScene)//init
+					switch (nextScene)//Init
 					{
-					case Scene::MENU:
+					case SCENE::MENU:
 						std::cout << "\nMENU Inited\n";
-						menu::init();
+						menu::Init();
 						break;
-					case Scene::GAME:
+					case SCENE::GAME:
 						std::cout << "\nGAME Inited\n";
-						game::init();
+						game::Init();
 						break;
-					case Scene::CONFIG:
+					case SCENE::CONFIG:
 						std::cout << "\nConfig Inited\n";
-						configScreen::init();
+						configScreen::Init();
 						break;
-					case Scene::CREDITS:
+					case SCENE::CREDITS:
 						std::cout << "\nCredits Inited\n";
-						credits::init();
+						credits::Init();
 						break;
 					}
 
@@ -60,28 +60,29 @@ namespace pong {
 
 				else
 				{
-					//std::cout << "On Scene > ";
-					switch (scene) //deinit
+					//std::cout << "On SCENE > ";
+					switch (scene) //Deinit
 					{
-					case Scene::MENU:
+					case SCENE::MENU:
 						//std::cout << "MENU\n";
 						break;
-					case Scene::GAME:
+					case SCENE::GAME:
 						//std::cout << "GAME\n";
 						break;
 					}
+
 				}
 
 			}
 
 		}
 
-		void generalInit()
+		void GeneralInit()
 		{
-
+			backgroundColor = CreateColor(20,20,20);
 			InitWindow(screen::width, screen::height, "Pong By Guido Tello");
 			SetTargetFPS(screen::fpsRate);
-			screen::setCenterPoint();
+			screen::SetCenterPoint();
 			std::string fontPath = "res/assets/Font/font.ttf";
 			font = LoadFontEx(&fontPath[0], fontSize, 0, 250);
 			fontPath = "res/assets/Font/score.ttf";
@@ -92,7 +93,7 @@ namespace pong {
 
 		}
 
-		void generalDeinit()
+		void GeneralDeinit()
 		{
 			DeinitAudioButtons();
 			CloseAudioDevice();
@@ -100,55 +101,57 @@ namespace pong {
 			UnloadFont(scoreFont);
 		}
 
-		void generalUpdate(config::scenes::Scene scene)
+		void GeneralUpdate(config::scenes::SCENE scene)
 		{
 
 			using namespace scenes;
 
 			switch (scene)
 			{
-			case Scene::MENU:
-				menu::update();
+			case SCENE::MENU:
+				menu::Update();
 				break;
-			case Scene::GAME:
-				game::update();
+			case SCENE::GAME:
+				game::Update();
 				break;
-			case Scene::CONFIG:
-				configScreen::update();
+			case SCENE::CONFIG:
+				configScreen::Update();
 				//std::cout << "GAME Deinited";
 				break;
-			case Scene::CREDITS:
-				credits::update();
+			case SCENE::CREDITS:
+				credits::Update();
 				break;
-			case Scene::QUIT:
+			case SCENE::QUIT:
 				menu::continueInGame = false;
 				break;
 			}
 		}
 
-		void generalDraw(config::scenes::Scene scene)
+		void GeneralDraw(config::scenes::SCENE scene)
 		{
 			using namespace scenes;
 
 			BeginDrawing();
-			ClearBackground(LIGHTGRAY);
+			ClearBackground(backgroundColor);
+			//ClearBackground(LIGHTGRAY);
+			//ClearBackground(CreateColor(20,20,20));
 
 			switch (scene)
 			{
-			case Scene::MENU:
-				menu::draw();
+			case SCENE::MENU:
+				menu::Draw();
 				break;
-			case Scene::GAME:
-				game::draw();
+			case SCENE::GAME:
+				game::Draw();
 				break;
-			case Scene::CONFIG:
-				configScreen::draw();
+			case SCENE::CONFIG:
+				configScreen::Draw();
 				//std::cout << "GAME Deinited";
 				break;
-			case Scene::CREDITS:
-				credits::draw();
+			case SCENE::CREDITS:
+				credits::Draw();
 				break;
-			case Scene::QUIT:
+			case SCENE::QUIT:
 				menu::continueInGame = false;
 				break;
 			}
@@ -165,24 +168,24 @@ namespace pong {
 	}
 
 
-	void runGame() {
+	void RunGame() {
 
-		config::generalInit();
+		config::GeneralInit();
 
 		do {
 
 			using namespace config;
 			using namespace scenes;
 
-			scenes::sceneManager(scene, next_scene);
+			scenes::SceneManager(scene, next_scene);
 
-			generalUpdate(scene);
+			GeneralUpdate(scene);
 
-			generalDraw(scene);
+			GeneralDraw(scene);
 
 		} while (!WindowShouldClose() && menu::continueInGame);
 
-		config::generalDeinit();
+		config::GeneralDeinit();
 
 	}
 

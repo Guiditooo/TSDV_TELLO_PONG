@@ -212,11 +212,18 @@ typedef struct Color {
 
 // Rectangle type
 typedef struct Rectangle {
-public:
+    //const public:
     float x;
     float y;
     float width;
     float height;
+    //Rectangle() 
+    //{
+    //    x = 0;
+    //    y = 0;
+    //    width = 0;
+    //    height = 0;
+    //}
     Vector2 GetCenter() {
         Vector2 aux;
         aux.x = x + width / 2;
@@ -226,6 +233,15 @@ public:
     Vector2 GetPos() {
         return {x, y};
     }
+    //bool Equals(Rectangle rec)
+    //{
+    //    float k = 0.000001f;
+    //    bool a = (rec.x > x - k && rec.x < x + k);
+    //    bool b = (rec.y > y - k && rec.y < y + k);
+    //    bool c = (rec.height > height - k && rec.height < height + k);
+    //    bool d = (rec.width > width - k && rec.width < width + k);
+    //    return (a && b && c && d);
+    //}
 } Rectangle;
 
 // Image type, bpp always RGBA (32bit)

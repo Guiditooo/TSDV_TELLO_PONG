@@ -13,20 +13,20 @@ namespace pong {
 
 		namespace scenes {			
 
-			void sceneManager(Scene&, Scene);
+			void SceneManager(SCENE&, SCENE);
 
 		}
 
-		void generalInit();
-		void generalUpdate(config::scenes::Scene scene);
-		void generalDraw(config::scenes::Scene scene);
-		void generalDeinit();
+		void GeneralInit();
+		void GeneralUpdate(config::scenes::SCENE scene);
+		void GeneralDraw(config::scenes::SCENE scene);
+		void GeneralDeinit();
 
-		void setCenterPoint();
+		void SetCenterPoint();
 
 	}
 
-	void runGame();
+	void RunGame();
 
 }
 #endif
