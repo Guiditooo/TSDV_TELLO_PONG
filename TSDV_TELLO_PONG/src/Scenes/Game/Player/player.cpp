@@ -16,6 +16,7 @@ namespace pong {
 			_scoreBoard = Letter();
 			_justScored = false;
 			_justHitted = false;
+			_justWon = false;
 		}
 		Player::~Player(){}
 		void Player::SetPosition(Vec2 position) 
@@ -48,10 +49,10 @@ namespace pong {
 		}
 		void Player::SetLetterColors(Color background, Color frame, Color text, int frameWidth)
 		{
-			_scoreBoard.text.color = text;
-			_scoreBoard.frameColor = frame;
+			_scoreBoard.text.color      = text;
+			_scoreBoard.frameColor      = frame;
 			_scoreBoard.backgroundColor = background;
-			_scoreBoard.frameWidth = frameWidth;
+			_scoreBoard.frameWidth      = frameWidth;
 		}
 
 		void Player::SetActionKey(ACTIONKEYS index, KeyboardKey key) { _keys[static_cast<int>(index)] = key; }
@@ -80,6 +81,7 @@ namespace pong {
 		Color Player::GetLetterBackgroundColor() { return _scoreBoard.backgroundColor; }
 		Color Player::GetLetterFrameColor() { return _scoreBoard.frameColor; }
 		Color Player::GetLetterTextColor() { return _scoreBoard.text.color; }
+		std::string Player::GetLetterText() { return _scoreBoard.text.tx; }
 		int Player::GetLetterFrameWidth() { return _scoreBoard.frameWidth; }
 		Rectangle Player::GetRectangle() { return _rec; }
 		SIDE Player::GetSide() { return _side; }
@@ -166,6 +168,11 @@ namespace pong {
 			DrawRectangleLinesEx(_scoreBoard.GetRec(), _scoreBoard.frameWidth, _scoreBoard.frameColor);
 			_scoreBoard.CenterText();
 			DrawTextEx(scoreFont, &_scoreBoard.text.tx[0], _scoreBoard.text.pos.ToVector2(), fontSize, spacing, _scoreBoard.text.color);
+		}
+
+		void Player::DrawLabel()
+		{
+			DrawTextEx(scoreFont, &_label.tx[0], _label.pos.ToVector2(), fontSize, spacing, _label.color);
 		}
 
 	}

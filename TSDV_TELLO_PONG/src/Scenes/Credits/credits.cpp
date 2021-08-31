@@ -25,20 +25,20 @@ namespace pong {
 			string lines[howManyCreditLines] =
 			{
 				"Programmer:  Guido Tello",
-				"Textures by:  CRAFTPIX.NET",
-				"Music:  Fiesta Online OST",
-				    "Created Using Raylib"
+				"Textures by:  Image Campus Artists",
+				"Music:  No Copyright Sounds (NCS)",
+				"Created Using Raylib"
 			};
 
 			for (short i = 0; i < howManyCreditLines; i++)
 			{
 				credits[i].tx = lines[i];
-				credits[i].size = textSize;
-				credits[i].color = WHITE;
+				credits[i].size = textSize*2;
+				credits[i].color = BLACK;
 				credits[i].pos.x = config::screen::width * 2 / 7;
 				credits[i].pos.y = config::screen::height * 1 / 5 + textPadding*i + i *  MeasureTextEx(font, &credits[i].tx[0], textSize, 1).y;
 			}
-			credits[3].pos.x = config::screen::width / 2 - MeasureTextEx(font, &credits[3].tx[0], textSize, 1).x / 2;
+			//credits[3].pos.x = config::screen::width / 2 - MeasureTextEx(font, &credits[3].tx[0], textSize, 1).x / 2;
 
 			creditMusic = LoadMusicStream("res/assets/Music/credits.mp3");
 			PlayMusicStream(creditMusic);

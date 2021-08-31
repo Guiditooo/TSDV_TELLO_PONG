@@ -17,6 +17,9 @@ namespace pong {
 
 		Rectangle gameplayRec, lowerRec, menuRec, lateralViewRec, scoreRec;
 
+		Letter winScreen;
+		Text winText;
+
 		Player* p1;
 		Player* p2;
 
@@ -29,14 +32,6 @@ namespace pong {
 
 		void Init() 
 		{
-			if(p1==nullptr)
-				p1 = new Player();
-			p1->SetColor(PINK);
-			if(p2 ==nullptr)
-				p2 = new Player();
-			p2->SetColor(WHITE);
-
-			BallInit();
 
 			ZonesInit();
 
@@ -46,7 +41,7 @@ namespace pong {
 			
 			limit.InitLimits(gameplayRec, table.position, table.texture.width, table.texture.height);
 
-			PlayersInit();
+			ResetGame();
 
 		}
 		void Update()
@@ -61,7 +56,8 @@ namespace pong {
 
 			CheckButtons();
 
-			if (!isPaused) {
+			if (!isPaused) 
+			{
 
 				CheckWinConditions();
 
@@ -112,7 +108,7 @@ namespace pong {
 					}
 
 					if (onLateralLimit)
-					{
+					{//La pelota toca los limites de la cancha y se mete punto
 						switch (static_cast<SIDE>(whichLateralLimit))
 						{
 						case pong::SIDE::LEFT:
@@ -139,7 +135,7 @@ namespace pong {
 				}
 
 				if (onSideLimit)
-				{
+				{//La pelota toca arriba o abajo
 					switch (static_cast<SIDE>(whichSideLimit))
 					{
 					case pong::SIDE::UP:
@@ -164,37 +160,54 @@ namespace pong {
 		}
 		void Draw() 
 		{
-			table.Draw();
-			if(ball!=nullptr)
-				ball->Draw();
-			
-#if  _DEBUG
-			if(ball!=nullptr)
-				DrawRectangleLinesEx(ball->GetBallRectangle(), 1, RED);
-			DrawRectangleLinesEx(gameplayRec, 2, RED);
-			DrawRectangleLinesEx(lowerRec, 2, GREEN);
-			DrawRectangleLinesEx(lateralViewRec, 2, BLACK);
-			DrawRectangleLinesEx(menuRec, 2, PINK);
-			DrawRectangleLinesEx(scoreRec, 2, DARKBLUE);
-			limit.Draw();
-#endif //  DEBUG
-			for (short i = 0; i < howManyButtons; i++)
+			if (!winScreen.isActive)
 			{
-				button[i].Draw();
+				table.Draw();
+				if (ball != nullptr)
+					ball->Draw();
+
+#if  _DEBUG
+				if (ball != nullptr)
+					DrawRectangleLinesEx(ball->GetBallRectangle(), 1, RED);
+				DrawRectangleLinesEx(gameplayRec, 2, RED);
+				DrawRectangleLinesEx(lowerRec, 2, GREEN);
+				DrawRectangleLinesEx(lateralViewRec, 2, BLACK);
+				DrawRectangleLinesEx(menuRec, 2, PINK);
+				DrawRectangleLinesEx(scoreRec, 2, DARKBLUE);
+				limit.Draw();
+#endif //  DEBUG
+
+
+				if (p1 != nullptr)
+				{
+					p1->DrawPlayer();
+					p1->DrawLabel();
+				}
+				if (p2 != nullptr)
+				{
+					p2->DrawPlayer();
+					p2->DrawLabel();
+				}
+
+				lateralTable.Draw();
+
+			}
+			else
+			{
+				DrawWinScreen();
+				DrawTextEx(scoreFont, &winText.tx[0], winText.pos.ToVector2(), fontSize, spacing, winText.color);
 			}
 
 			if (p1 != nullptr)
 			{
 				p1->DrawLetter();
-				p1->DrawPlayer();
 			}
 			if (p2 != nullptr)
-			{	 
+			{
 				p2->DrawLetter();
-				p2->DrawPlayer();
 			}
 
-			lateralTable.Draw();
+			DrawButtons();
 
 		}
 		void Deinit() 
@@ -224,7 +237,12 @@ namespace pong {
 
 		void ResetGame() 
 		{
-
+			BallInit();
+			PlayersInit();
+			winScreen.isActive = false;
+			p1->Won(false);
+			p2->Won(false);
+			isPaused = false;
 		}
 
 		void Score()
@@ -233,8 +251,6 @@ namespace pong {
 			ball->SetBallAcceleration(Vec2(30, 25));
 			ball->SetPosition(gameplayRec.GetCenter());
 			
-			//p1->SetPosition(Vec2(table.position.x - p1->GetWidth() / 2, gameplayRec.GetCenter().y - p1->GetHeight() / 2));
-			//p2->SetPosition(Vec2(table.position.x + table.texture.width - p2->GetWidth() / 2, gameplayRec.GetCenter().y - p2->GetHeight() / 2));
 			p1->SetSpeed(Vec2(200, 200));
 			p2->SetSpeed(Vec2(200, 200));
 			p1->Scored(false);
@@ -244,12 +260,30 @@ namespace pong {
 
 		void PlayersInit()
 		{
+			if (p1 == nullptr)
+				p1 = new Player();
+			p1->SetColor(PINK);
+			if (p2 == nullptr)
+				p2 = new Player();
+			p2->SetColor(WHITE);
 			p1->SetScore(0);
 			p2->SetScore(0);
+			p1->SetText("Player 1");
+			p2->SetText("Player 2");
+			p1->SetTextColor(WHITE);
+			p2->SetTextColor(WHITE);
+			p1->SetTextSize(fontSize);
+			p2->SetTextSize(fontSize);
+			Vec2 aux = MeasureTextEx(scoreFont, &p1->GetText()[0], fontSize, spacing);
+			p1->SetTextPosition(Vec2(limit.GetLimit(SIDE::LEFT).width / 2-aux.x/2, aux.y/2));
+			aux = MeasureTextEx(scoreFont, &p2->GetText()[0], fontSize, spacing);
+			p2->SetTextPosition(Vec2(limit.GetLimit(SIDE::RIGHT).x + limit.GetLimit(SIDE::RIGHT).width / 2-aux.x/2, aux.y/2));
 			p1->SetLetterWidth((scoreRec.width - lateralViewRec.width) / 2);
-			p1->SetLetterPos(Vec2(scoreRec.GetPos().x, lateralViewRec.y));
+			p1->SetLetterHeight(MeasureTextEx(scoreFont, &p1->GetLetterText()[0], fontSize, spacing).y);
+			p1->SetLetterPos(Vec2(scoreRec.GetPos().x, lateralViewRec.y + 20));
 			p2->SetLetterWidth((scoreRec.width - lateralViewRec.width) / 2);
-			p2->SetLetterPos(Vec2(scoreRec.GetPos().x + scoreRec.width - p2->GetLetterWidth(), lateralViewRec.y));
+			p2->SetLetterHeight(MeasureTextEx(scoreFont, &p2->GetLetterText()[0], fontSize, spacing).y);
+			p2->SetLetterPos(Vec2(scoreRec.GetPos().x + scoreRec.width - p2->GetLetterWidth(), lateralViewRec.y + 20));
 			p1->SetLetterColors(BLACK, WHITE, PINK, 3);
 			p2->SetLetterColors(BLACK, WHITE, PINK, 3);
 			p1->SetAxis(AXIS::VERTICAL);
@@ -282,16 +316,20 @@ namespace pong {
 		}
 		void ButtonsInit()
 		{
-			std::string btn_text[howManyButtons] = { "Pause","Main Menu" };
-			buttons::Selector btn_type[howManyButtons] = { buttons::Selector::PAUSE, buttons::Selector::MENU };
-
+			std::string btn_text[howManyButtons] = { "Main Menu", "Reset", "Pause" };
+			
+			buttons::Selector btn_type[howManyButtons] = { buttons::Selector::PAUSE, buttons::Selector::MENU, buttons::Selector::RESET };
 			for (short i = 0; i < howManyButtons; i++)
 			{
 				button[i].MakeStandardButton();
+				button[i].SetButtonType(static_cast<buttons::Selector>(i));
 				button[i].SetText(btn_text[i]);
-				button[i].SetButtonType(btn_type[i]);
-				button[i].SetButtonPosition({ menuRec.x + menuRec.width / 2 - (button[i].GetButtonSize().x) / 2  ,   menuRec.y + menuRec.height / 4 - (button[i].GetButtonSize().y) / 2 + (menuRec.height / 2) * i });
 			}
+
+			button[static_cast<int>(buttons::Selector::RESET)].SetButtonPosition({ menuRec.x + menuRec.width / 4 - (button[static_cast<int>(buttons::Selector::RESET)].GetButtonSize().x) / 2  ,   menuRec.y + menuRec.height / 4 - (button[static_cast<int>(buttons::Selector::RESET)].GetButtonSize().y) / 2/* + (menuRec.height / 4)*/});
+			button[static_cast<int>(buttons::Selector::PAUSE)].SetButtonPosition({ menuRec.x + menuRec.width * 3 / 4 - (button[static_cast<int>(buttons::Selector::PAUSE)].GetButtonSize().x) / 2  ,   menuRec.y + menuRec.height / 4 - (button[static_cast<int>(buttons::Selector::PAUSE)].GetButtonSize().y) / 2});
+			button[static_cast<int>(buttons::Selector::MENU)].SetButtonPosition({ menuRec.x + menuRec.width / 2 - (button[static_cast<int>(buttons::Selector::MENU)].GetButtonSize().x) / 2  ,   menuRec.y + menuRec.height * 3 / 4 - (button[static_cast<int>(buttons::Selector::MENU)].GetButtonSize().y) / 2});
+
 		}
 		void TimersInit()
 		{
@@ -355,12 +393,14 @@ namespace pong {
 			ball->Init();
 			ball->SetRadius(16);
 			ball->SetBallSpeed(Vec2(100, 40));
-#if _DEBUG	
-			ball->SetBallSpeed(Vec2(100, 40));
-#endif			
 			ball->SetBallAcceleration(Vec2(30, 25));
+#if _DEBUG	
+			ball->SetBallSpeed(Vec2(120, 40));
+			ball->SetBallAcceleration(Vec2(40, 25));
+#endif			
 			ball->SetTexture(LoadTexture("res/assets/Ball/ball_blue.png"));
 			ball->SetColor(BLACK);
+			ball->SetPosition(Vec2(gameplayRec.x + gameplayRec.width/2,gameplayRec.y + gameplayRec.height/2));
 		}
 
 		void CheckButtons()
@@ -392,6 +432,13 @@ namespace pong {
 							isPaused = !isPaused;
 						}
 					}
+					if (button[i].GetButtonType() == elements::buttons::Selector::RESET)
+					{
+						if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+						{
+							ResetGame();
+						}
+					}
 				}
 				else
 				{
@@ -405,31 +452,33 @@ namespace pong {
 		}
 		void CheckWinConditions() 
 		{
-			if (p1->GetScore() == pointLimit) {
+			if (p1->GetScore() == pointLimit) 
+			{
 				p1->Won(true);
 				isPaused = true;
 			}
 
-			if (p1->GetScore() == pointLimit) {
-				p1->Won(true);
+			if (p2->GetScore() == pointLimit) 
+			{
+				p2->Won(true);
 				isPaused = true;
 			}
+
+			if (!winScreen.isActive)
+			{
+				if (p1->JustWon() || p2->JustWon())
+				{
+					WinScreenInit();
+				}
+			}
+
 		}
-		
-		void DrawTimers()
-		{
-			
-		}
+
 		void DrawButtons()
 		{
 			for (short i = 0; i < howManyButtons; i++)
 			{
-				/*
-				if (button[i] != NULL)
-				{
-					button[i]->Draw();
-				}
-				*/
+				button[i].Draw();
 			}
 		}
 
@@ -437,14 +486,58 @@ namespace pong {
 		{
 
 		}
-		void DeinitTimers()
-		{
-			
-		}
 
 		void Score::SetScoreAsText()
 		{
 			text.tx = std::to_string(score);
+		}
+
+		void WinScreenInit() 
+		{
+			Color aux = Color();
+			winScreen.isActive = true;
+			if (p1->JustWon()) 
+			{
+				winScreen.Init(p1->GetText());
+				aux = p1->GetColor();
+			}
+			if (p2->JustWon()) 
+			{
+				winScreen.Init(p2->GetText());
+				aux = p2->GetColor();
+			}
+
+			winScreen.pos = Vec2(gameplayRec.x, gameplayRec.y);
+			winScreen.width = gameplayRec.width;
+			winScreen.height = gameplayRec.height;
+
+			winScreen.backgroundColor = CreateColor(aux.r, aux.g, aux.b, 40);
+			winScreen.frameColor = CreateColor(aux.r, aux.g, aux.b);
+			winScreen.text.color = WHITE;
+
+			winText.tx = "Wins";
+			winText.size = fontSize;
+			winText.color = WHITE;
+
+			Vec2 a = MeasureTextEx(scoreFont, &winScreen.text.tx[0], fontSize, spacing);
+			Vec2 b = MeasureTextEx(scoreFont, &winText.tx[0], fontSize, spacing);
+
+			winScreen.text.pos = Vec2(gameplayRec.width / 2 - a.x / 2, gameplayRec.height / 2 - a.y / 2);
+			winText.pos = Vec2(gameplayRec.width / 2 - b.x / 2, gameplayRec.height / 2 + b.y / 2);
+
+
+		}
+		void CheckWinScreenButtons()
+		{
+
+		}
+		void DrawWinScreen()
+		{
+			DrawRectangleRec(winScreen.GetRec(), winScreen.backgroundColor);
+			DrawRectangleLinesEx(winScreen.GetRec(), winScreen.frameWidth, winScreen.frameColor);
+			winScreen.CenterText();
+			DrawTextEx(scoreFont, &winScreen.text.tx[0], winScreen.text.pos.ToVector2(), fontSize, spacing, winScreen.text.color);
+
 		}
 
 	}

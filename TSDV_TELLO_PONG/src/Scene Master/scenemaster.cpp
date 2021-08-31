@@ -53,7 +53,6 @@ namespace pong {
 						break;
 					}
 
-
 					scene = nextScene;
 
 				}

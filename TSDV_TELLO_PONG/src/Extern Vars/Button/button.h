@@ -18,9 +18,9 @@ namespace pong{
 			enum class Selector
 			{
 				MENU,
-				GAME,
 				RESET,
 				PAUSE,
+				GAME,
 				CREDITS,
 				CONFIG,
 				MUSIC,

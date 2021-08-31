@@ -8,7 +8,7 @@ const int spaceBetweenButtons = 10;
 
 namespace pong {
 
-	int pointLimit = 5;
+	int pointLimit = 10;
 
 	namespace configScreen {
 

@@ -21,6 +21,8 @@ namespace pong {
 		int hoveredOption = 0;
 		int hoveredOptionPast = 0;
 
+		Text title;
+
 		Color background;
 		Texture2D bgTexture;
 
@@ -41,25 +43,23 @@ namespace pong {
 			buttonBeep = LoadSound("res/assets/Sounds/buttonClic.ogg");
 			SetSoundVolume(buttonBeep, 0.3f);
 
-			title[1].tx = "PONG";
+			title.tx = "PONG";
+			title.size = fontSize * 2;
 
-			for (short i = 0; i < titleLenght; i++)
+			title.pos.x = config::screen::width / 2 - MeasureTextEx(font, &title.tx[0], title.size, spacing).x / 2;
+			title.pos.y = config::screen::height * 3 / 26 ;
+			title.color = GetRandomColor(200, 255);
+
+			background = GetRandomColor(170, 255);
+
+			for (short i = 0; i < howManyButtons; i++)
 			{
-				title[i].size = config::screen::height / 13;
-				title[i].pos.x = config::screen::width / 2 - MeasureTextEx(font, &title[i].tx[0], title->size, 1).x / 2;
-				title[i].pos.y = config::screen::height * (2 + i) / 13 + 5 * i;
-				title[i].color = GetRandomColor(200,255);
-
-			}
-
-			background = GetRandomColor(170,255);
-
-			for (short i = 0; i < howManyButtons; i++) {
 
 				Buttons btn;
 				std::string text;
 
-				switch ((config::scenes::SCENE)(i+1)) {
+				switch ((config::scenes::SCENE)(i + 1))
+				{
 
 				case config::scenes::SCENE::CONFIG:
 					text = "PLAY";
@@ -77,7 +77,7 @@ namespace pong {
 
 				btn.square.width = (float)MeasureTextEx(font, &btn.txt.tx[0], baseTextHeight, 1).x;
 				btn.square.height = (float)baseTextHeight;
-				btn.square.x = (float)(config::screen::width / 2 - MeasureTextEx(font,&btn.txt.tx[0], btn.square.height,1).x/2);
+				btn.square.x = (float)(config::screen::width / 2 - MeasureTextEx(font, &btn.txt.tx[0], btn.square.height, 1).x / 2);
 				btn.square.y = config::screen::height * 19 / 40 + config::screen::height * i * 2 / 25;
 
 				btn.color = BLACK;
@@ -152,7 +152,7 @@ namespace pong {
 
 			for (short i = 0; i < titleLenght; i++) 
 			{
-				DrawTextEx(font, &title[i].tx[0], title[i].pos.ToVector2(), title->size, 1, title[i].color);
+				DrawTextEx(font, &title.tx[0], title.pos.ToVector2(), title.size, 1, title.color);
 			}
 
 			for (short i = 0; i < howManyButtons; i++) 
@@ -162,7 +162,7 @@ namespace pong {
 
 				if (btn.selected) 
 				{
-					color = LIME;
+					color = RED;
 					btn.square.height *= plusSelected;
 					btn.square.width = MeasureTextEx(font,&btn.txt.tx[0], baseTextHeight, spacing).x;
 					btn.square.x = config::screen::width / 2 - MeasureTextEx(font, &btn.txt.tx[0], btn.square.height, spacing).x / 2;
@@ -175,8 +175,6 @@ namespace pong {
 				}
 
 				DrawTextEx(font, &(btn.txt.tx)[0], { btn.square.x, btn.square.y }, btn.square.height, 1, color);
-
-				//btn.DrawButton();
 
 			}
 

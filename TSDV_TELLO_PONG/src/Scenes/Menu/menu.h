@@ -13,7 +13,6 @@ namespace pong {
 		const int titleLenght = 3;
 
 		extern Buttons buttons[howManyButtons];
-		static Text title[titleLenght];
 
 		static Sound buttonBeep;
 		static Music menuMusic;

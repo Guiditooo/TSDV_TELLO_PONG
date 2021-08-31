@@ -70,6 +70,7 @@ namespace pong {
 	{
 		Text text;
 		Vec2 pos;
+		bool isActive = false;
 		int width;
 		int height;
 		int paddingX = 5;

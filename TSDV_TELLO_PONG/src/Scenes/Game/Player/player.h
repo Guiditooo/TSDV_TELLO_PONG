@@ -56,6 +56,7 @@ namespace pong {
 			Color GetLetterBackgroundColor();
 			Color GetLetterFrameColor();
 			Color GetLetterTextColor();
+			std::string GetLetterText();
 			int GetLetterFrameWidth();
 			KeyboardKey GetKey(ACTIONKEYS index);
 			int GetScore();
@@ -71,6 +72,7 @@ namespace pong {
 			void SubOneToScore();
 			void DrawPlayer();
 			void DrawLetter();
+			void DrawLabel();
 
 		private:
 			Letter _scoreBoard;

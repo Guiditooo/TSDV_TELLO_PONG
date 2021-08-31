@@ -42,7 +42,11 @@ namespace pong {
 		}
 		void Ball::SetBallAcceleration(Vec2 acceleration) { _acceleration.Set(acceleration); }
 		void Ball::SetBallSpeed(Vec2 speed) { _speed.Set(speed); }
-		void Ball::SetPosition(Vec2 position) { _position.Set(position); }
+		void Ball::SetPosition(Vec2 position) 
+		{ 
+			_position.Set(position); 
+			CorrectBallPosition();
+		}
 		void Ball::SetTexture(Texture2D texture) 
 		{ 
 			_texture = texture;
@@ -70,13 +74,19 @@ namespace pong {
 		
 		void Ball::Move(float time)
 		{
-			SetPosition(_position + _speed * time);
+			_position = _position + ( _speed * time );
 		}
 
 		void Ball::ApplyAcceleration(float time)
 		{
 			SetBallSpeed(_speed + (_acceleration * time));
 			//std::cout << "\nSpeed: " << _speed.x << "|" << _speed.y << "\n";
+		}
+
+		void Ball::CorrectBallPosition()
+		{
+			_position.x -= _radius / 2;
+			_position.y -= _radius / 2;
 		}
 
 	}

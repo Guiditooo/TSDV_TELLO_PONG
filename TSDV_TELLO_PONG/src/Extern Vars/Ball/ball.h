@@ -38,6 +38,7 @@ namespace pong {
 
 			void Move(float time);
 			void ApplyAcceleration(float time);
+			void CorrectBallPosition();
 
 		private:
 			int _rotation;

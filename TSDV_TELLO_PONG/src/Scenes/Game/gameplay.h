@@ -35,6 +35,7 @@ namespace pong {
 		void Update();
 		void Draw();
 		void Deinit();
+		void WinScreenInit();
 
 		void Score();
 		void ResetGame();
@@ -50,12 +51,15 @@ namespace pong {
 
 		void CheckButtons();
 		void CheckWinConditions();
+		void CheckWinScreenButtons();
 
 		void DrawTimers();
 		void DrawButtons();
+		void DrawWinScreen();
 
 		void DeinitButtons();
 		void DeinitTimers();
+
 
 		struct Limits
 		{
